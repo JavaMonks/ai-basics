@@ -3,13 +3,14 @@ package com.projects.poc.processingjava.brain;
 import processing.core.PApplet;
 
 public class Perceptron {
-    private float[] weights = new float[2];
+    private final float learningRate = 0.001f;
     private PApplet app;
-    private final float learningRate = 0.000001f;
+    private float[] weights;
 
-    public Perceptron(PApplet app) {
+    public Perceptron(PApplet app, int inputs) {
         this.app = app;
-        for (int i = 0; i < weights.length; i++) {
+        this.weights = new float[inputs];
+        for (int i = 0; i < inputs; i++) {
             weights[i] = this.app.random(-1, 1);
         }
     }
@@ -39,6 +40,14 @@ public class Perceptron {
 
     private int activationFunction(float weightedSum) {
         return weightedSum >= 0 ? 1 : -1;
+    }
+
+    public float guessY(float x) {
+        //w0*x + w1*y + w2*bias = 0
+        // y = - (w0*x + w2*bias) / w1
+
+        return -(weights[0] * x + weights[2] * 1) / weights[1];
+//        return -(weights[2] / weights[1]) - (weights[0] / weights[1]) * x;
     }
 
 

@@ -23,7 +23,7 @@ public class App extends PApplet {
     }
 
     public void setup() {
-        this.perceptron = new Perceptron(this);
+        this.perceptron = new Perceptron(this, 3);
         this.points = IntStream.rangeClosed(1, 100)
                                .mapToObj(index -> new Point(this))
                                .collect(Collectors.toCollection(LinkedList::new));
@@ -35,19 +35,27 @@ public class App extends PApplet {
         this.stroke(0);
         Point p1 = new Point(this, -1, App.f(-1));
         Point p2 = new Point(this, 1, App.f(1));
-        this.line(p1.coordinates[0], p1.coordinates[1], p2.coordinates[0], p2.coordinates[1]);
+        this.line(p1.displayCoordinates[0], p1.displayCoordinates[1], p2.displayCoordinates[0], p2.displayCoordinates[1]);
+
+        Point p3 = new Point(this, -1, this.perceptron.guessY(-1));
+        Point p4 = new Point(this, 1, this.perceptron.guessY(1));
+
+        this.line(p3.displayCoordinates[0], p3.displayCoordinates[1], p4.displayCoordinates[0], p4.displayCoordinates[1]);
+
         this.points.stream()
                    .peek(Point::show)
                    .forEach(point -> {
-                       this.perceptron.train(point.coordinates, point.label);
-                       int guess = this.perceptron.guess(point.coordinates);
+                       float[] inputs = new float[]{point.x, point.y, 1};//bias
+                       this.perceptron.train(inputs, point.label);
+                       int guess = this.perceptron.guess(inputs);
+
                        if (guess == point.label) {
                            fill(0, 255, 0);
                        } else {
                            fill(255, 0, 0);
                        }
                        this.noStroke();
-                       this.ellipse(point.coordinates[0], point.coordinates[1], 16, 16);
+                       this.ellipse(point.displayCoordinates[0], point.displayCoordinates[1], 16, 16);
                    });
 
     }
