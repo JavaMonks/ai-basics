@@ -48,12 +48,4 @@ public class Point {
         return y > yIntercept ? 1 : -1;
     }
 
-    public float getX() {
-        return PApplet.map(x, -1, 1, 0, this.app.width);
-    }
-
-    public float getY() {
-        return PApplet.map(y, -1, 1, this.app.height, 0);
-    }
-
 }
