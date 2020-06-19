@@ -10,20 +10,16 @@ public class Point {
     public Point(PApplet app) {
         this.app = app;
         this.coordinates = new float[2];
-        this.coordinates[0] = this.app.random(this.app.width);
-        this.coordinates[1] = this.app.random(this.app.height);
-        this.label = this.coordinates[0] < this.coordinates[1] ? -1 : 1;
-    }
-
-    public Point(PApplet app, float x, float y) {
-        this.app = app;
-        this.coordinates = new float[]{x, y};
-        this.label = this.coordinates[0] < this.coordinates[1] ? -1 : 1;
+        float x = this.app.random(-1, 1);
+        float y = this.app.random(-1, 1);
+        this.coordinates[0] = PApplet.map(x, -1, 1, 0, this.app.width);
+        this.coordinates[1] = PApplet.map(y, -1, 1, this.app.height, 0);
+        this.label = x > y ? -1 : 1;
     }
 
     public void show() {
         this.app.stroke(0);
-        if (label > 0) {
+        if (label == 1) {
             this.app.fill(255);
         } else {
             this.app.fill(0);

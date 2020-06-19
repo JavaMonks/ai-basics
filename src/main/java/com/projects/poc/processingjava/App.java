@@ -19,7 +19,6 @@ public class App extends PApplet {
     }
 
     public void setup() {
-        frameRate(60);
         this.perceptron = new Perceptron(this);
         this.points = IntStream.rangeClosed(1, 500)
                                .mapToObj(index -> new Point(this))
@@ -30,7 +29,7 @@ public class App extends PApplet {
     public void draw() {
         background(255);
         this.stroke(0);
-        this.line(0, 0, this.width, this.height);
+        this.line(0, height, this.width, 0);
         this.points.stream()
                    .peek(Point::show)
                    .forEach(point -> {

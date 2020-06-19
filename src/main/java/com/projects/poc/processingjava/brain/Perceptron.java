@@ -5,7 +5,7 @@ import processing.core.PApplet;
 public class Perceptron {
     private float[] weights = new float[2];
     private PApplet app;
-    private final float learningRate = 0.1f;
+    private final float learningRate = 0.000001f;
 
     public Perceptron(PApplet app) {
         this.app = app;
