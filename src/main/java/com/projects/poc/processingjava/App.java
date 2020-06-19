@@ -23,6 +23,7 @@ public class App extends PApplet {
     }
 
     public void setup() {
+        this.frameRate(5);
         this.perceptron = new Perceptron(this, 3);
         this.points = IntStream.rangeClosed(1, 100)
                                .mapToObj(index -> new Point(this))

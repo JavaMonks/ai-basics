@@ -6,9 +6,4 @@ The line separates the 2d space into 2 parts.
 
 If the perceptron makes a correct guess, the point becomes green, else the point becomes red.
 
-Sources:
-https://www.youtube.com/playlist?list=PLRqwX-V7Uu6aCibgK1PTWWu9by6XFdCfh
-
-![before training](before.png)
-
-![after training](after.png)
+![classification](classification.gif)
