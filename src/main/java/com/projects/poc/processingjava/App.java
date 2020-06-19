@@ -13,6 +13,10 @@ public class App extends PApplet {
     private Perceptron perceptron;
     private List<Point> points;
 
+    public static float f(float x) {
+        return 0.3f * x + 0.2f;
+    }
+
     @Override
     public void settings() {
         size(800, 800);
@@ -20,7 +24,7 @@ public class App extends PApplet {
 
     public void setup() {
         this.perceptron = new Perceptron(this);
-        this.points = IntStream.rangeClosed(1, 500)
+        this.points = IntStream.rangeClosed(1, 100)
                                .mapToObj(index -> new Point(this))
                                .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -29,7 +33,9 @@ public class App extends PApplet {
     public void draw() {
         background(255);
         this.stroke(0);
-        this.line(0, height, this.width, 0);
+        Point p1 = new Point(this, -1, App.f(-1));
+        Point p2 = new Point(this, 1, App.f(1));
+        this.line(p1.coordinates[0], p1.coordinates[1], p2.coordinates[0], p2.coordinates[1]);
         this.points.stream()
                    .peek(Point::show)
                    .forEach(point -> {
