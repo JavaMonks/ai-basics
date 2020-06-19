@@ -24,7 +24,7 @@ public class App extends PApplet {
 
     public void setup() {
         this.perceptron = new Perceptron(this, 3);
-        this.points = IntStream.rangeClosed(1, 100)
+        this.points = IntStream.rangeClosed(1, 5)
                                .mapToObj(index -> new Point(this))
                                .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -60,5 +60,11 @@ public class App extends PApplet {
 
     }
 
+    @Override
+    public void mousePressed() {
+        float x = map(mouseX, 0, width, -1, 1);
+        float y = map(mouseY, 0, height, 1, -1);
+        this.points.add(new Point(this, x, y));
+    }
 }
 
